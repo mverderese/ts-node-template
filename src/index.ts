@@ -1,11 +1,11 @@
 const run = async () => {
-  const getResponse = await fetch('https://httpbin.org/get');
+  const getResponse = await fetch("https://httpbin.org/get");
   const getData = await getResponse.json();
-  console.log('Data from get:', getData);
+  console.log("Data from get:", getData);
 
-  const postResponse = await fetch('https://httpbin.org/post', {method: 'POST', body: JSON.stringify(getData)});
+  const postResponse = await fetch("https://httpbin.org/post", { method: "POST", body: JSON.stringify(getData) });
   const postData = await postResponse.json();
-  console.log('Data from post:', postData);
+  console.log("Data from post:", postData);
 };
 
 run().then(
