@@ -3,7 +3,11 @@ const run = async () => {
   const getData = await getResponse.json();
   console.log("Data from get:", getData);
 
-  const postResponse = await fetch("https://httpbin.org/post", { method: "POST", body: JSON.stringify(getData) });
+  const postResponse = await fetch("https://httpbin.org/post", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(getData),
+  });
   const postData = await postResponse.json();
   console.log("Data from post:", postData);
 };
