@@ -1,15 +1,27 @@
+process.env.TZ = "UTC";
+
 const run = async () => {
   const getResponse = await fetch("https://httpbin.org/get");
-  const getData = await getResponse.json();
-  console.log("Data from get:", getData);
+  let getData: object | undefined;
+  if (getResponse.status === 200) {
+    getData = await getResponse.json();
+    console.log("Data from get:", getData);
+  } else {
+    console.log(`Error from get request (Status code ${getResponse.status}):`, await getResponse.text());
+  }
 
   const postResponse = await fetch("https://httpbin.org/post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(getData),
   });
-  const postData = await postResponse.json();
-  console.log("Data from post:", postData);
+  let postData: object | undefined;
+  if (postResponse.status === 200) {
+    postData = await postResponse.json();
+    console.log("Data from post:", postData);
+  } else {
+    console.log(`Error from post request (Status code ${postResponse.status}):`, await postResponse.text());
+  }
 };
 
 run().then(
